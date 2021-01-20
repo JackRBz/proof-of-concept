@@ -5,9 +5,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({data: "data"})
-});
+const db = require('./models')
+// app.get('/', (req, res) => {
+//     res.json({data: "data"})
+// });
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}!`);
