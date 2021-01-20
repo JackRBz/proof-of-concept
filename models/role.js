@@ -7,14 +7,13 @@ module.exports = function(sequelize, DataTypes) {
     Role.associate = function(models) {
       // Associating User with Posts
       // When an User is deleted, also delete any associated Posts
+      Role.hasMany(
+        models.User,
+        {
+          onDelete: "cascade",
+        }
+      );
 
-      Role.belongsToMany(models.User, {through: 'Role_User'},{
-        onDelete: "cascade"
-      });
-
-    //   Role.belongsToMany(models.Permission, {through: 'Role_Permission'},{
-    //     onDelete: "cascade"
-    //   });
     };
   
     return Role;
