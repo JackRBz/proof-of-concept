@@ -10,6 +10,9 @@ const db = require('./models')
 //     res.json({data: "data"})
 // });
 
+const routes = require("./routes");
+app.use(routes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}!`);
 });
