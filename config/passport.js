@@ -25,7 +25,8 @@ passport.use(
         const user = await db.User.findOne({
           where: {
             email: email,
-          },
+          }, include: [
+            { model: db.Role, as: "Role"}],
         });
 
         if (!user) {

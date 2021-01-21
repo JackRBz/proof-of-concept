@@ -7,7 +7,7 @@ var db = require("../models");
 exports.file = async (req, res) => {
   try {
     db.File.create(req.body).then(function (data) {
-         db.Grant.bulkCreate([{FileId: data.id, PermissionId: 1},{FileId: data.id, PermissionId: 2}])
+        db.Grant.bulkCreate([{FileId: data.id, PermissionId: 1},{FileId: data.id, PermissionId: 2}])
       return res.status(201).json({
         // 201: Successfully created
         success: true,
@@ -27,6 +27,7 @@ exports.file = async (req, res) => {
 //@route  GET /api/file
 //@access Secure
 exports.files = async (req, res) => {
+    const permission = ac.can().deleteAny("post");
     try {
       db.File.findAll().then(function (files) {
         return res.status(200).json({

@@ -1,11 +1,14 @@
 // Requiring our models
 var db = require("../models");
+const ac = require("./utils/accessPolicy");
 
 //@desc   Create a role
 //@route  POST /api/role
 //@access Secure
 exports.role = async (req, res) => {
   try {
+    const permission = ac.can(res.user.user.Role.name).createOwn("role");
+    if (permission.granted) {
     db.Role.create(req.body).then(function (data) {
       return res.status(201).json({
         // 201: Successfully created
@@ -13,6 +16,9 @@ exports.role = async (req, res) => {
         data: data,
       });
     });
+  } else {
+    return res.status(403).json({ success: false, message: "No permission" });
+  }
   } catch (err) {
     res.status(400).json({
       success: false,
@@ -21,12 +27,13 @@ exports.role = async (req, res) => {
   }
 };
 
-
 //@desc   Get all roles
 //@route  GET /api/role
 //@access Secure
 exports.roles = async (req, res) => {
-    try {
+  try {
+    const permission = ac.can(res.user.user.Role.name).readAny("role");
+    if (permission.granted) {
       db.Role.findAll().then(function (roles) {
         return res.status(200).json({
           success: true,
@@ -34,14 +41,17 @@ exports.roles = async (req, res) => {
           data: roles,
         });
       });
-    } catch (err) {
-      res.status(500).json({
-        success: false,
-        error:
-          "GET failed. Server error. Message is: : " +
-          err.name +
-          " " +
-          err.message,
-      });
+    } else {
+      return res.status(403).json({ success: false, message: "No permission" });
     }
-  };
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error:
+        "GET failed. Server error. Message is: : " +
+        err.name +
+        " " +
+        err.message,
+    });
+  }
+};

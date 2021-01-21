@@ -20,7 +20,7 @@ exports.login = async (req, res, next) => {
         // Sign the JWT token and populate the payload with the user email and id
         // Token expires in 1hour as described here https://github.com/auth0/node-jsonwebtoken\
         // TODO: Move secret to env file
-        const token = jwt.sign({ id: user.id }, "logger_secret", {
+        const token = jwt.sign({ id: user.id ,user: user }, "logger_secret", {
           expiresIn: 60 * 60,
         });
         //Send back the token to the user
