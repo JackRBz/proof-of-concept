@@ -5,7 +5,7 @@ const {verifyToken} = require('./utils/verifyToken');
 
 router.use('/api', openApi);
 
-router.use('/api',verifyToken, secureApi);
+router.use('/api', secureApi);
 
 module.exports = router;
 

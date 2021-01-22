@@ -32,7 +32,7 @@ exports.role = async (req, res) => {
 //@access Secure
 exports.roles = async (req, res) => {
   try {
-    const permission = ac.can(res.user.user.Role.name).readAny("role");
+    const permission = ac.can("Advisor").readAny("role");
     if (permission.granted) {
       db.Role.findAll().then(function (roles) {
         return res.status(200).json({
