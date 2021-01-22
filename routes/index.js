@@ -1,8 +1,11 @@
-const router = require('express').Router;
-const openAPI = require('./openAPI');
+const router = require('express').Router();
+const openApi = require('./openAPI');
+const secureApi = require('./secureApi');
+const {verifyToken} = require('./utils/verifyToken');
 
-router.use('/api', openAPI);
+router.use('/api', openApi);
 
+router.use('/api',verifyToken, secureApi);
 
-module.exports = Router;
+module.exports = router;
 

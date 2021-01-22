@@ -1,9 +1,12 @@
-const router = require('express').Router;
+const router = require('express').Router();
+const authRoutes = require('./auth');
 
-function home () {
-    return 'hello home'
-};
+// Auth routes
+// Login                   /api/auth/login
+// Get logged in user      /api/auth/me
+// Logout                  /api/auth/logout
+// Register                /api/auth/register
+router.use('/auth', authRoutes);
 
-router.route('/').get(home);
-    
+
 module.exports = router;
