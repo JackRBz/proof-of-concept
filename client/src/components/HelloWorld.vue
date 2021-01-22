@@ -1,19 +1,20 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <button  v-on:click="login">login</button>
-    <button  v-on:click="register">register</button>
+    <button v-on:click="login">login</button>
+    <a href='/register'> Register</a>
+
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
-const transport = axios.create({
-  headers: {
-    'content-Type': 'application/json',
-  },
-});
+// const transport = axios.create({
+//   headers: {
+//     'content-Type': 'application/json',
+//   },
+// });
 
 // transport.interceptors.request.use(
 //   (config) => {
@@ -48,16 +49,16 @@ export default {
     msg: String,
   },
   methods: {
-    async login() {
+    register() {
       // const data = await transport.post('http://localhost:5000/api/auth/login', { email: 'test@mail.com', password: '123123123' });
       // console.log(data);
-      const data = await transport.get('http://localhost:5000/api/role');
-      console.log(data);
+      // const data = await transport.get('http://localhost:5000/api/role');
+      // console.log(data);
+      // this.$router.push('/register');
     },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
-</style>
+<style></style>

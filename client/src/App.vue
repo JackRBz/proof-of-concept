@@ -7,7 +7,7 @@
 export default {
   name: 'App',
   components: {
-    HelloWorldComponent,
+    HelloWorld,
   },
 };
 </script>
