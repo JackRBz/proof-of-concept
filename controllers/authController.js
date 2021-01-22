@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const { validateInput } = require("../services/authService");
 const { checkIfUserExists, addUser } = require("../services/userService");
-const { sendErrorPOST,ConflictError } = require("./errors/controllerErrors");
+const { sendErrorPOST, ConflictError } = require("./errors/controllerErrors");
 
 //@desc   Log user in
 //@route  POST /auth/login

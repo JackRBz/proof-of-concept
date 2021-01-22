@@ -1,11 +1,17 @@
 // Requiring our models
 var db = require("../models");
-
+const {checkRequiredFields} = require("./utils/validation");
+const { sendErrorPOST, ValidationError } = require("./errors/controllerErrors");
 //@desc   Create a file
 //@route  POST /api/file
 //@access Secure
 exports.file = async (req, res) => {
   try {
+
+    if(checkRequiredFields(req.body,"path")){
+      return sendErrorPOST(res,ValidationError)
+    }
+
     db.File.create(req.body).then(function (data) {
         db.Grant.bulkCreate([{FileId: data.id, PermissionId: 1},{FileId: data.id, PermissionId: 2}])
       return res.status(201).json({
