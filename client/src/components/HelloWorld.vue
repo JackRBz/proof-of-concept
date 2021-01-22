@@ -2,6 +2,7 @@
   <div>
     <h1>{{ msg }}</h1>
     <button  v-on:click="login">login</button>
+    <button  v-on:click="register">register</button>
   </div>
 </template>
 
@@ -48,10 +49,10 @@ export default {
   },
   methods: {
     async login() {
-      const data = await transport.post('http://localhost:5000/api/auth/login', { email: 'ubadahatta12@gmail.com', password: '123123' });
-      console.log(data);
-      // const data = await axios.get('http://localhost:5000/api/role');
+      // const data = await transport.post('http://localhost:5000/api/auth/login', { email: 'test@mail.com', password: '123123123' });
       // console.log(data);
+      const data = await transport.get('http://localhost:5000/api/role');
+      console.log(data);
     },
   },
 };
